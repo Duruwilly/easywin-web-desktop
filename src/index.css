@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-optical-sizing: auto;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+.width-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px 0 12px;
+}
+
+.custom-swiper-pagination .swiper-pagination-bullet,
+.custom1-swiper-pagination .swiper-pagination-bullet {
+  background-color: white;
+  margin: 0 4px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - 1rem /* 16px */));
+  }
+}
+.animate-scroll {
+  animation: scroll 60s linear infinite;
+}
+
+section:hover .animate-scroll,
+section:active .animate-scroll {
+  animation-play-state: paused;
+}
+
+.table-responsive {
+  margin-bottom: 0px;
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 0.7px solid #dddddd;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  padding: 5px 10px;
+  white-space: nowrap;
+  color: white;
+}
