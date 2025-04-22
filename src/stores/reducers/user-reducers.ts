@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { User } from '@/models/User';
+import { User } from '../../models/User';
 
 const UserReducerState: {
   isAuthenticated: boolean;

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { AppState } from '@/models/App';
+import { AppState } from '../../models/App';
 
 const initialState: AppState = {
   errors: [],

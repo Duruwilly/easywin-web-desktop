@@ -13,7 +13,7 @@ interface IOtpProps {
 const Otp = ({ onOtherInfoOpen, onClose }: IOtpProps) => {
   const [otp, setOtp] = useState<string>("");
   const [resendOtptimeRemaining, setResendOtpTimeRemaining] = useState(60);
-  const { loginWithOtp, getOtpLogin } = useAuthServices();
+  const { loginWithOtp } = useAuthServices();
   const handleOtpChange = (value: string) => {
     setOtp(value);
   };
@@ -40,10 +40,10 @@ const Otp = ({ onOtherInfoOpen, onClose }: IOtpProps) => {
     },
   });
 
-  const resendOtp = async () => {
-    await getOtpLogin({ phone_number: "" });
-    setResendOtpTimeRemaining(60);
-  };
+  // const resendOtp = async () => {
+  //   await getOtpLogin({ phone_number: "" });
+  //   setResendOtpTimeRemaining(60);
+  // };
 
   useEffect(() => {
     if (resendOtptimeRemaining > 0) {
