@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { APP_ROUTES } from "../../constants/app-routes";
+import { APP_ROUTES } from "@/constants/app-routes";
 
 const NavMenu = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);

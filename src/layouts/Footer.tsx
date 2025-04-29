@@ -134,7 +134,7 @@ const Footer = () => {
             </p>
           </div>
           <p className="text-white text-[18px] text-center font-normal">
-            Copyright © 2019-2025 EASYWIN LOTTO LTD
+            Copyright © 2019-{new Date().getFullYear()} EASYWIN LOTTO LTD
           </p>
         </div>
       </div>

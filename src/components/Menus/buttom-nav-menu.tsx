@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { APP_ROUTES } from "../../constants/app-routes";
+import { APP_ROUTES } from "@/constants/app-routes";
 import { Link, useLocation } from "react-router-dom";
 
 const ButtomNavMenu = () => {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Tabs from "../../components/Tabs/tabs";
+import Tabs from "@/components/Tabs/tabs";
 import NewsList from "./components/news-list";
 import { Link } from "react-router-dom";
 import { HiArrowNarrowRight } from "react-icons/hi";

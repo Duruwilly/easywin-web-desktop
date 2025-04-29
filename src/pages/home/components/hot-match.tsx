@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
-import Button from "../../../components/Button/button";
+import Button from "@/components/Button/button";
 import { IoIosArrowForward } from "react-icons/io";
-import ArsenalImg from "../../../assets/images/Arsenal.png";
-import FullhamImg from "../../../assets/images/fulham-fc.png";
+import ArsenalImg from "@/assets/images/Arsenal.png";
+import FullhamImg from "@/assets/images/fulham-fc.png";
 
 const HotMatch = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);

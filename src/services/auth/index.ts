@@ -1,4 +1,4 @@
-import { TLogin, TRegister, TRegisterOne } from "../../types/validations/auth";
+import { TLogin, TRegister, TRegisterOne } from "@/types/validations/auth";
 import { useApi } from "../useApi";
 
 export const useAuthServices = () => {

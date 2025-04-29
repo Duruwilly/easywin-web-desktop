@@ -1,4 +1,4 @@
-import NewsImg1 from "../../../assets/images/news-img1.png";
+import NewsImg1 from "@/assets/images/news-img1.png";
 
 interface NewsProps {
   tag?: string;

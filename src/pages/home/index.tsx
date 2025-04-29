@@ -1,13 +1,13 @@
-import PatternBg from "../../assets/images/logo-icon2.png";
+import PatternBg from "@/assets/images/logo-icon2.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import bannerSlide1 from "../../assets/images/home-banner-slide1.png";
-import InputPhone from "../../components/Input/InputPhone";
+import bannerSlide1 from "@/assets/images/home-banner-slide1.png";
+import InputPhone from "@/components/Input/InputPhone";
 import { useState } from "react";
-import Button from "../../components/Button/button";
-import Announcement from "../../components/Announcement";
+import Button from "@/components/Button/button";
+import Announcement from "@/components/Announcement";
 import HotMatch from "./components/hot-match";
 import TopGames from "./components/top-games";
 import Highlight from "./components/highlight";

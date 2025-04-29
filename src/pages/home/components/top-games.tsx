@@ -1,11 +1,11 @@
-import TopGames1 from "../../../assets/images/top-games-img1.png";
-import TopGames2 from "../../../assets/images/top-games-img2.png";
-import TopGames3 from "../../../assets/images/top-games-img3.png";
-import TopGames4 from "../../../assets/images/top-games-img4.png";
-import TopGames5 from "../../../assets/images/top-games-img5.png";
-import TopGames6 from "../../../assets/images/top-games-img5.png";
-import Button from "../../../components/Button/button";
-import IPeople from "../../../assets/images/people.png";
+import TopGames1 from "@/assets/images/top-games-img1.png";
+import TopGames2 from "@/assets/images/top-games-img2.png";
+import TopGames3 from "@/assets/images/top-games-img3.png";
+import TopGames4 from "@/assets/images/top-games-img4.png";
+import TopGames5 from "@/assets/images/top-games-img5.png";
+import TopGames6 from "@/assets/images/top-games-img5.png";
+import Button from "@/components/Button/button";
+import IPeople from "@/assets/images/people.png";
 
 const TopGames = () => {
   return (

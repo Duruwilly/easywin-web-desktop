@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { useOutsideClick } from '../../hooks/useOutsideClick';
+import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { useEffect, useState } from 'react';
 import Label from '../Label/Label';
 

@@ -1,6 +1,6 @@
 import { HiArrowNarrowRight } from "react-icons/hi";
-import PromotionImg from "../../assets/images/promotion-img.png";
-import Button from "../../components/Button/button";
+import PromotionImg from "@/assets/images/promotion-img.png";
+import Button from "@/components/Button/button";
 
 const PromotionList = () => {
   return (

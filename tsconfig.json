@@ -8,8 +8,7 @@
       "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"]
     },
-    "moduleResolution": "Node",
-    "typeRoots": ["./node_modules/@types", "./node_modules/swiper"]
+    "moduleResolution": "Node"
   },
   "files": [],
   "references": [

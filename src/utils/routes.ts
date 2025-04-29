@@ -1,4 +1,4 @@
-import { APP_ROUTES } from "../constants/app-routes";
+import { APP_ROUTES } from "@/constants/app-routes";
 import { HomePage, NewsPage, ProfilePage, PromotionPage } from "../pages";
 
 export const routes: Array<{ path: string; element: React.FC }> = [

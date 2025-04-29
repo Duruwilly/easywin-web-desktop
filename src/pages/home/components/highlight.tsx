@@ -1,18 +1,18 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
-import GiftImg1 from "../../../assets/images/gift-img.png";
-import SearchInput from "../../../components/Input/SearchInput";
+import GiftImg1 from "@/assets/images/gift-img.png";
+import SearchInput from "@/components/Input/SearchInput";
 import { ReactNode, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiFilterAlt, BiSolidDownArrow } from "react-icons/bi";
 import Tabs from "../../../components/Tabs/tabs";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
-import Button from "../../../components/Button/button";
-import TextInput from "../../../components/Input/Input";
-import GoldCoin from "../../../assets/images/gold-coin.png";
-import SilverCoin from "../../../assets/images/silver-coin.png";
-import BronzeCoin from "../../../assets/images/bronze-coin.png";
+import Button from "@/components/Button/button";
+import TextInput from "@/components/Input/Input";
+import GoldCoin from "@/assets/images/gold-coin.png";
+import SilverCoin from "@/assets/images/silver-coin.png";
+import BronzeCoin from "@/assets/images/bronze-coin.png";
 
 const Highlight = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
