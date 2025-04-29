@@ -1,22 +1,22 @@
 import { HiArrowNarrowRight } from "react-icons/hi";
-import PromotionImg from "@/assets/images/promotion-img.png";
 import Button from "@/components/Button/button";
+import { IPromotions } from "@/models/Promotions";
 
-const PromotionList = () => {
+const PromotionList = ({ item }: { item: IPromotions }) => {
   return (
     <div className="relative bg-white rounded-xl">
       <img
-        src={PromotionImg}
+        src={item?.image ?? ""}
         alt="promotion"
         className="hfull max-h[200px] w-full object-cover rounded-tr-xl rounded-tl-xl"
       />
       <div className="!py-3 !px-4 flex items-center justify-between">
         <div className="flex flex-col gap-1">
           <p className="text-[#202046] text-base leading-[130%]">
-            This is a promotions title
+            {item?.title}
           </p>
           <p className="text-[#9CA2AA] text-xs leading-[130%]">
-            This is a promotions detail
+            {item?.description}
           </p>
         </div>
         <Button

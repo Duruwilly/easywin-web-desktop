@@ -2,14 +2,14 @@ import InputPhone from "../Input/InputPhone";
 import InputPassword from "../Input/InputPassword";
 import Button from "../Button/button";
 import { Link } from "react-router-dom";
-import GiftBox from "../../assets/images/gift-box.png";
+import GiftBox from "@/assets/images/gift-box.png";
 import { useState } from "react";
-import { useAuthServices } from "../../services/auth";
-import { RegisterOneSchema, TRegisterOne } from "../../types/validations/auth";
-import { phoneNumberWoPlus } from "../../utils";
+import { useAuthServices } from "@/services/auth";
+import { RegisterOneSchema, TRegisterOne } from "@/types/validations/auth";
+import { phoneNumberWoPlus } from "@/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 
 interface IProps {
   onCloseModal: () => void;
@@ -24,6 +24,7 @@ const Register = ({ onCloseModal, onOtpOpen }: IProps) => {
     register,
     watch,
     setValue,
+    control,
     formState: { errors },
     handleSubmit,
   } = useForm<TRegisterOne>({
@@ -31,6 +32,9 @@ const Register = ({ onCloseModal, onOtpOpen }: IProps) => {
     resolver: zodResolver(RegisterOneSchema),
     reValidateMode: "onChange",
   });
+
+  const phoneNumberValue = useWatch({ control, name: "phone_number" });
+  const passwordValue = useWatch({ control, name: "password" });
 
   const signupPhoneNumber = watch("phone_number");
 
@@ -53,6 +57,9 @@ const Register = ({ onCloseModal, onOtpOpen }: IProps) => {
       onOtpOpen();
     },
   });
+
+  const isButtonDisabled =
+    isPending || !phoneNumberValue?.trim() || !passwordValue?.trim();
 
   return (
     <form
@@ -100,7 +107,7 @@ const Register = ({ onCloseModal, onOtpOpen }: IProps) => {
           text="Create New Account"
           className="w-full !py-3 rounded-full pacity-30"
           isLoading={isPending}
-          disabled={isPending}
+          disabled={isButtonDisabled}
         />
         <Button className="bg-gradient-to-r from-[#00FF59] to-[#FFD338] w-fit !py-1 rounded-none rounded-tl-full rounded-tr-full rounded-br-full absolute right-0 -top-3.5 !px-2 text-xs">
           <img src={GiftBox} alt="" className="w-4 h-4" />

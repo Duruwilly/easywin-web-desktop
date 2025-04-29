@@ -1,9 +1,9 @@
 import Button from "../Button/button";
-import { useAuthServices } from "../../services/auth";
-import { RegisterSchema, TRegister } from "../../types/validations/auth";
+import { useAuthServices } from "@/services/auth";
+import { RegisterSchema, TRegister } from "@/types/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
 import TextInput from "../Input/Input";
 
 interface IProps {
@@ -17,11 +17,15 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
     register,
     formState: { errors },
     handleSubmit,
+    control,
   } = useForm<TRegister>({
     mode: "onBlur",
     resolver: zodResolver(RegisterSchema),
     reValidateMode: "onChange",
   });
+
+  const firstName = useWatch({ control, name: "first_name" });
+  const lastName = useWatch({ control, name: "last_name" });
 
   const onSubmit: SubmitHandler<TRegister> = async (data) => {
     mutate({
@@ -40,6 +44,8 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
     },
   });
 
+  const isButtonDisabled = isPending || !firstName?.trim() || !lastName?.trim();
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -51,7 +57,7 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
           {...register("first_name")}
           error={errors.first_name?.message}
           placeholderColor="#C0C3C8"
-          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white text-base !rounded-lg"
+          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white !text-black text-base !rounded-lg"
           padding="12px"
         />
 
@@ -60,7 +66,7 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
           {...register("last_name")}
           error={errors.last_name?.message}
           placeholderColor="#C0C3C8"
-          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white text-base !rounded-lg"
+          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white !text-black text-base !rounded-lg"
           padding="12px"
         />
 
@@ -69,7 +75,7 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
           {...register("email")}
           error={errors.email?.message}
           placeholderColor="#C0C3C8"
-          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white text-base !rounded-lg"
+          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white !text-black text-base !rounded-lg"
           padding="12px"
         />
 
@@ -78,15 +84,15 @@ const OtherInfoRegistration = ({ onCloseModal }: IProps) => {
           {...register("invitation_code")}
           error={errors.invitation_code?.message}
           placeholderColor="#C0C3C8"
-          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white text-base !rounded-lg"
+          className="border border-[#E1E1E1] outline-none focus:ring-0 mb-0 gap-2.5 !px-4 bg-white !text-black text-base !rounded-lg"
           padding="12px"
         />
       </div>
       <Button
         text="Sign Up"
-        className="w-full !py-3 rounded-full opacity-30"
+        className="w-full !py-3 rounded-full"
         isLoading={isPending}
-        disabled={isPending}
+        disabled={isButtonDisabled}
       />
     </form>
   );

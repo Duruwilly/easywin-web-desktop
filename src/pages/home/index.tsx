@@ -73,8 +73,6 @@ const HomePage = () => {
                     clickable: true,
                     el: ".custom-swiper-pagination",
                   }}
-                  onSwiper={(swiper) => console.log(swiper)}
-                  onSlideChange={() => console.log("slide change")}
                 >
                   {bannerSlider.map((img, idx) => (
                     <SwiperSlide key={idx}>

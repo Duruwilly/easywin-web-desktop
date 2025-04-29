@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Toast } from "../../config/toast";
-import { useAuthServices } from "../../services/auth";
+import { Toast } from "@/config/toast";
+import { useAuthServices } from "@/services/auth";
 import { useMutation } from "@tanstack/react-query";
 import OtpInput from "../Input/OtpInput";
 import Button from "../Button/button";
@@ -19,10 +19,6 @@ const Otp = ({ onOtherInfoOpen, onClose }: IOtpProps) => {
   };
 
   const verifyOtpFunc = async () => {
-    if (otp.length !== 4) {
-      Toast.error("Please enter a 4-digit OTP");
-      return;
-    }
     await loginWithOtp({
       otp,
     });
@@ -39,6 +35,14 @@ const Otp = ({ onOtherInfoOpen, onClose }: IOtpProps) => {
       onClose();
     },
   });
+
+  const handleVerifyOtp = () => {
+    if (otp.length !== 4) {
+      Toast.error("Please enter a 4-digit OTP");
+      return;
+    }
+    mutate();
+  };
 
   // const resendOtp = async () => {
   //   await getOtpLogin({ phone_number: "" });
@@ -69,7 +73,7 @@ const Otp = ({ onOtherInfoOpen, onClose }: IOtpProps) => {
         className="w-full !py-3 rounded-full opacity30"
         isLoading={isPending}
         disabled={isPending}
-        onClick={() => mutate()}
+        onClick={handleVerifyOtp}
       />
       {/* <div className="mt-5">
         <p className="text-white text-xs font-medium text-center">

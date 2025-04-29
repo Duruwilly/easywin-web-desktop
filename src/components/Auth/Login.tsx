@@ -3,12 +3,12 @@ import InputPhone from "../Input/InputPhone";
 import InputPassword from "../Input/InputPassword";
 import InputWithButton from "../Input/InputWithButton";
 import Button from "../Button/button";
-import { useAuthServices } from "../../services/auth";
-import { LoginSchema, TLogin } from "../../types/validations/auth";
+import { useAuthServices } from "@/services/auth";
+import { LoginSchema, TLogin } from "@/types/validations/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { phoneNumberWoPlus } from "../../utils";
+import { SubmitHandler, useForm, useWatch } from "react-hook-form";
+import { phoneNumberWoPlus } from "@/utils";
 
 interface IProps {
   onCloseModal: () => void;
@@ -24,6 +24,7 @@ const Login = ({ onCloseModal }: IProps) => {
     register,
     watch,
     setValue,
+    control,
     formState: { errors },
     handleSubmit,
   } = useForm<TLogin>({
@@ -31,6 +32,9 @@ const Login = ({ onCloseModal }: IProps) => {
     resolver: zodResolver(LoginSchema),
     reValidateMode: "onChange",
   });
+
+  const phoneNumberValue = useWatch({ control, name: "phone_number" });
+  const passwordValue = useWatch({ control, name: "password" });
 
   const { mutate, isPending } = useMutation({
     mutationFn: authLogin,
@@ -56,6 +60,9 @@ const Login = ({ onCloseModal }: IProps) => {
     });
     onCloseModal();
   };
+
+  const isButtonDisabled =
+    isPending || !phoneNumberValue?.trim() || !passwordValue?.trim();
 
   useEffect(() => {
     if (resendOtptimeRemaining < 60) {
@@ -119,7 +126,6 @@ const Login = ({ onCloseModal }: IProps) => {
             }
             disabled={isOtpPending}
             isLoading={isOtpPending}
-            type="submit"
             padding="12px"
             buttonclass="!py-0 !text-[#9CA2AA]"
             className="border border-[#E1E1E1] text-base !px-4 bg-white !rounded-lg"
@@ -187,7 +193,7 @@ const Login = ({ onCloseModal }: IProps) => {
           text="Login"
           className="w-full !py-3 rounded-full opacity-30"
           isLoading={isPending}
-          disabled={isPending}
+          disabled={isButtonDisabled}
         />
         {!usepass && (
           <div className="mt-5">

@@ -44,7 +44,7 @@ const TextInput = forwardRef<HTMLInputElement, InputProps>(
             ref={ref as React.Ref<HTMLInputElement>}
             {...rest}
             placeholder={placeholder}
-            className={`border border-none bg-transparent !px-2 text-white placeholder:text-[${placeholderColor}] h-full w-full`}
+            className={`border border-none bg-transparent !px-2 textwhite placeholder:text-[${placeholderColor}] h-full w-full`}
           />
 
           {preIcon && (

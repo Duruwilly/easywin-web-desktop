@@ -3,9 +3,9 @@ import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/swiper-bundle.css";
 import GiftImg1 from "@/assets/images/gift-img.png";
 import SearchInput from "@/components/Input/SearchInput";
-import { ReactNode, useRef, useState } from "react";
+import { Dispatch, ReactNode, SetStateAction, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import { BiFilterAlt, BiSolidDownArrow } from "react-icons/bi";
+import { BiFilterAlt, BiFootball, BiSolidDownArrow } from "react-icons/bi";
 import Tabs from "../../../components/Tabs/tabs";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import Button from "@/components/Button/button";
@@ -13,12 +13,21 @@ import TextInput from "@/components/Input/Input";
 import GoldCoin from "@/assets/images/gold-coin.png";
 import SilverCoin from "@/assets/images/silver-coin.png";
 import BronzeCoin from "@/assets/images/bronze-coin.png";
+import { LiaTimesSolid } from "react-icons/lia";
+
+interface Ihightlight {
+  id: number;
+  matchTitle: string;
+  clubs: string[];
+  points: { point: string; id: number }[];
+}
 
 const Highlight = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [tab, setTab] = useState("Football");
+  const [highlightToggle, setHighlightToggle] = useState(true);
   const [resultTable, setResultTable] = useState("ghana lotto");
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -28,6 +37,7 @@ const Highlight = () => {
       setShowRightArrow(scrollLeft + clientWidth < scrollWidth);
     }
   };
+  const [betSlip, setBetSlip] = useState<Ihightlight[]>([]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
@@ -63,6 +73,61 @@ const Highlight = () => {
     { text: "More", icon: <IoIosArrowDown size={16} /> },
     { text: "Filter", icon: <BiFilterAlt size={16} /> },
   ];
+
+  const hightlightGames: Ihightlight[] = [
+    {
+      id: 0,
+      matchTitle: "International · UEFA Nations Leagua",
+      clubs: ["Vietnam", "Cambodia"],
+      points: [
+        { point: "10.29", id: 0 },
+        { point: "10.29", id: 1 },
+        { point: "25.29", id: 2 },
+      ],
+    },
+    {
+      id: 1,
+      matchTitle: "International · UEFA Nations Leagua",
+      clubs: ["Vietnam", "Cambodia"],
+      points: [
+        { point: "15.29", id: 3 },
+        { point: "12.29", id: 4 },
+        { point: "10.29", id: 5 },
+      ],
+    },
+    {
+      id: 2,
+      matchTitle: "International · UEFA Nations Leagua",
+      clubs: ["Vietnam", "Cambodia"],
+      points: [
+        { point: "10.29", id: 6 },
+        { point: "10.09", id: 7 },
+        { point: "10.29", id: 8 },
+      ],
+    },
+    {
+      id: 3,
+      matchTitle: "International · UEFA Nations Leagua",
+      clubs: ["Vietnam", "Cambodia"],
+      points: [
+        { point: "10.29", id: 9 },
+        { point: "10.29", id: 10 },
+        { point: "10.29", id: 11 },
+      ],
+    },
+    {
+      id: 4,
+      matchTitle: "International · UEFA Nations Leagua",
+      clubs: ["Vietnam", "Cambodia"],
+      points: [
+        { point: "10.29", id: 12 },
+        { point: "10.29", id: 13 },
+        { point: "10.29", id: 14 },
+      ],
+    },
+  ];
+
+  console.log(betSlip, "bet slip");
 
   return (
     <div className="flex gap-4">
@@ -153,71 +218,13 @@ const Highlight = () => {
 
           <div className="rounded-xl w-full">
             {Array.from({ length: 2 }).map((_, idx) => (
-              <div key={idx}>
-                <div className="bg-[#1D2428] !px-4 !py-3 flex justify-between gap-6 items-center">
-                  <div className="flex items-center gap-3 flex[1] w-[45%]">
-                    <BiSolidDownArrow size={16} color="white" />
-                    <p className="text-[14px] text-white font-normal">
-                      20/03 Thu
-                    </p>
-                  </div>
-                  <div className="w-[55%] flex justify-around">
-                    <p className="text-white text-base font-medium flex[1]">
-                      1
-                    </p>
-                    <p className="text-white text-base font-medium flex[1]">
-                      X
-                    </p>
-                    <p className="text-white text-base font-medium flex[1]">
-                      2
-                    </p>
-                  </div>
-                </div>
-
-                {Array.from({ length: 5 }).map((_, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[#080B0C] !p-4 flex flex-col gap-3 border-b border-b-[#e0deff33]"
-                  >
-                    <div>
-                      <p className="text-[14px] text-white">
-                        International · UEFA Nations Leagua
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex flex-col gap-3">
-                        <p className="text-base text-white font-normal">
-                          Vietnam
-                        </p>
-                        <p className="text-base text-white font-normal">
-                          Cambodia
-                        </p>
-                      </div>
-
-                      <div className="flex items-center gap-6">
-                        <Button text="10.29" className="!py-3 !px-[62px]" />
-                        <Button text="10.29" className="!py-3 !px-[62px]" />
-                        <Button text="10.29" className="!py-3 !px-[62px]" />
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center gap-6">
-                        <p className="text-[#FFD700] text-[14px]">18:00</p>
-                        <Button
-                          text="Stats"
-                          postIcon={<IoIosArrowForward />}
-                          variant="transparent"
-                          className="border border-[#E0DEF7] !py-1 !px-2 rounded-lg text-xs font-medium"
-                        />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <p className="text-white text-[14px]">+65</p>
-                        <IoIosArrowForward size={24} color="#17BB50" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <HighlightGames
+                key={idx}
+                data={hightlightGames}
+                setBetSlip={setBetSlip}
+                onToggle={setHighlightToggle}
+                toggleState={highlightToggle}
+              />
             ))}
           </div>
         </div>
@@ -240,8 +247,6 @@ const Highlight = () => {
               el: ".custom1-swiper-pagination",
             }}
             scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
           >
             {bannerSlider.map((img, idx) => (
               <SwiperSlide key={idx}>
@@ -260,31 +265,97 @@ const Highlight = () => {
           <span className="bg-gradient-to-r from-[#00FF59] to-[#FFD338] text-transparent bg-clip-text font-bold text-2xl italic font-Montserrat">
             Betslip
           </span>
-          <div className="flex flex-col gap-2">
-            <p className="text-white text-base font-medium">
-              Your betslip is empty
-            </p>
-            <p className="text-[#e1e1e180] text-[14px]">
-              Please make one or more selection in order to place a bet
-            </p>
-          </div>
-          <div className="flex flex-col gap-2">
-            <p className="text-base font-medium text-white">Book</p>
-            <p className="text-[#e1e1e180] text-[14px]">
-              Please insert a booking number below,
-            </p>
-            <TextInput
-              name="booking code"
-              className="border-none outline-none focus:ring-0 !px-4 !bg-[#f7f7fd33] rounded-lg"
-              padding="12px"
-              placeholder="Enter Booking Code"
-            />
-          </div>
-          <Button
-            text="Register"
-            variant="secondary"
-            className="bg-gradient-to-r from-[#00FF59] to-[#FFD338] rounded-full !py-3 !px-6 w-full font-semibold text-base"
-          />
+          {betSlip?.length === 0 ? (
+            <>
+              <div className="flex flex-col gap-2">
+                <p className="text-white text-base font-medium">
+                  Your betslip is empty
+                </p>
+                <p className="text-[#e1e1e180] text-[14px]">
+                  Please make one or more selection in order to place a bet
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="text-base font-medium text-white">Book</p>
+                <p className="text-[#e1e1e180] text-[14px]">
+                  Please insert a booking number below,
+                </p>
+                <TextInput
+                  name="booking code"
+                  className="border-none outline-none focus:ring-0 !px-4 !bg-[#f7f7fd33] rounded-lg"
+                  padding="12px"
+                  placeholder="Enter Booking Code"
+                />
+              </div>
+              <Button
+                text="Register"
+                variant="secondary"
+                className="bg-gradient-to-r from-[#00FF59] to-[#FFD338] rounded-full !py-3 !px-6 w-full font-semibold text-base"
+              />
+            </>
+          ) : (
+            <div>
+              {betSlip?.map((item, idx) => (
+                <div className="bg-white !py-3 flex flex-col gap-3" key={idx}>
+                  <div className="border-b border-b-[#eaecef] !pb-3">
+                    <div className="flex justify-between items-center !px-2">
+                      <div className="flex items-center gap-0.5">
+                        <BiFootball size={15} />
+                        <p className="text-xs">Home</p>
+                      </div>
+                      <LiaTimesSolid
+                        size={13}
+                        onClick={() =>
+                          setBetSlip((prev) =>
+                            prev.filter(
+                              (bet) =>
+                                !item.points.some(
+                                  (i) => i.id === bet.points[0]?.id
+                                )
+                            )
+                          )
+                        }
+                      />
+                    </div>
+                    <div className="flex items-center gap-1 !px-2">
+                      <div className="bg-[#34ea6a] text-xs">Live</div>
+                      <p className="text-xs text-nowrap text-ellipsis">{`${item?.clubs[0]} v ${item?.clubs[1]}`}</p>
+                    </div>
+                    <div className="flex items-center justify-between !px-2">
+                      <p className="text-xs">1x2</p>
+                      <p className="text-xs">{item?.points[0]?.point}</p>
+                    </div>
+                  </div>
+                  {betSlip?.length - 1 === idx && (
+                    <>
+                      <div className="flex items-center justify-between !px-2">
+                        <p className="text-xs flex-[1]">Total Stake</p>
+                        <div className="text-xs flex items-center gap-0.5 flex-[1]">
+                          <p className="text-xs">NGN</p>
+                          <TextInput
+                            name="booking code"
+                            className="outline-none focus:ring-0 !px-4 border border-[#b4b4b4] rounded-none w[40px] text-black"
+                            padding="0px"
+                          />
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between !px-2">
+                        <p className="text-xs">Potential Win</p>
+                        <p className="text-xs">0</p>
+                      </div>
+                      <div className="!px-2">
+                        <Button
+                          text="Place Bet"
+                          variant="primary"
+                          className="rounded-lg !py-2 !px-6 w-full font-medium text-sm"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="bg-[#141B1F] rounded-xl !pt-4 flex flex-col gap-3">
@@ -488,3 +559,104 @@ const Highlight = () => {
 };
 
 export default Highlight;
+
+const HighlightGames = ({
+  data,
+  setBetSlip,
+  onToggle,
+  toggleState,
+}: {
+  data: Ihightlight[];
+  setBetSlip: Dispatch<SetStateAction<Ihightlight[]>>;
+  onToggle: Dispatch<SetStateAction<boolean>>;
+  toggleState: boolean;
+}) => {
+  const toggleBet = (item: Ihightlight, pointIndex: number) => {
+    
+    setBetSlip((prev) => {
+      const pointToToggle = item.points[pointIndex];
+
+      const exists = prev.some((b) => b.points[0]?.id === pointToToggle.id);
+
+      if (exists) {
+        return prev.filter((b) => b.points[0]?.id !== pointToToggle.id);
+      }
+
+      return [...prev, { ...item, points: [pointToToggle] }];
+    });
+  };
+
+  return (
+    <div>
+      <div className="bg-[#1D2428] !px-4 !py-3 flex justify-between gap-6 items-center">
+        <div className="flex items-center gap-3 flex[1] w-[45%]">
+          <BiSolidDownArrow
+            size={16}
+            color="white"
+            onClick={() => onToggle(false)}
+          />
+          <p className="text-[14px] text-white font-normal">20/03 Thu</p>
+        </div>
+        <div className="w-[55%] flex justify-around">
+          <p className="text-white text-base font-medium flex[1]">1</p>
+          <p className="text-white text-base font-medium flex[1]">X</p>
+          <p className="text-white text-base font-medium flex[1]">2</p>
+        </div>
+      </div>
+
+      {data.map((item, idx) => (
+        <div
+          key={idx}
+          className="bg-[#080B0C] !p-4 flex flex-col gap-3 border-b border-b-[#e0deff33]"
+        >
+          <div>
+            <p className="text-[14px] text-white">{item?.matchTitle}</p>
+          </div>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-3">
+              <p className="text-base text-white font-normal">
+                {item?.clubs[0]}
+              </p>
+              <p className="text-base text-white font-normal">
+                {item?.clubs[1]}
+              </p>
+            </div>
+
+            <div className="flex items-center gap-6">
+              <Button
+                text={item?.points[0]?.point}
+                className="!py-3 !px-[62px]"
+                onClick={() => toggleBet(item, 0)}
+              />
+              <Button
+                text={item?.points[1]?.point}
+                className="!py-3 !px-[62px]"
+                onClick={() => toggleBet(item, 1)}
+              />
+              <Button
+                text={item?.points[2]?.point}
+                className="!py-3 !px-[62px]"
+                onClick={() => toggleBet(item, 2)}
+              />
+            </div>
+          </div>
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <p className="text-[#FFD700] text-[14px]">18:00</p>
+              <Button
+                text="Stats"
+                postIcon={<IoIosArrowForward />}
+                variant="transparent"
+                className="border border-[#E0DEF7] !py-1 !px-2 rounded-lg text-xs font-medium"
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-white text-[14px]">+65</p>
+              <IoIosArrowForward size={24} color="#17BB50" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
