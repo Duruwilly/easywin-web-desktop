@@ -1,5 +1,5 @@
-import { countryData } from "../../constants/country";
-import { useOutsideClick } from "../../hooks/useOutsideClick";
+import { countryData } from "@/constants/country";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { InputHTMLAttributes, forwardRef, useMemo, useState } from "react";
 import Label from "../Label/Label";
 import { IoIosInformationCircle } from "react-icons/io";

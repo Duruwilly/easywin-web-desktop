@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./stores/store.ts";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./config/gateway.ts";
+import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("root")!).render(
           <App />
         </Provider>
       </BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
     </QueryClientProvider>
   </StrictMode>
 );
