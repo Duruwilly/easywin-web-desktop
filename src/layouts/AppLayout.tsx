@@ -6,6 +6,12 @@ import ArrowUp from "../assets/images/top-arrow.png";
 import BarCode from "../assets/images/bar-code.png";
 
 const AppLayout = () => {
+  const scrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -18,6 +24,7 @@ const AppLayout = () => {
           </div>
           <div
             className="w-[48px] h-[48px] rounded-full flex justify-center items-center bg-[#2e2f30] !ml-auto cursor-pointer"
+            onClick={scrollTop}
           >
             <img src={ArrowUp} alt="top arrow" className="w-[28px]" />
           </div>
