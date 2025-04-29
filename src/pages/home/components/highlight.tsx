@@ -564,7 +564,6 @@ const HighlightGames = ({
   data,
   setBetSlip,
   onToggle,
-  toggleState,
 }: {
   data: Ihightlight[];
   setBetSlip: Dispatch<SetStateAction<Ihightlight[]>>;
@@ -572,7 +571,6 @@ const HighlightGames = ({
   toggleState: boolean;
 }) => {
   const toggleBet = (item: Ihightlight, pointIndex: number) => {
-    
     setBetSlip((prev) => {
       const pointToToggle = item.points[pointIndex];
 
