@@ -6,6 +6,7 @@ import ArrowUp from "../assets/images/top-arrow.png";
 import BarCode from "../assets/images/bar-code.png";
 
 const AppLayout = () => {
+
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -15,7 +16,9 @@ const AppLayout = () => {
           <div className="w-[48px] h-[48px] rounded-full flex justify-center items-center bg-[#2e2f30] !ml-auto">
             <img src={SuuportIcon} alt="support icon" className="w-[28px]" />
           </div>
-          <div className="w-[48px] h-[48px] rounded-full flex justify-center items-center bg-[#2e2f30] !ml-auto">
+          <div
+            className="w-[48px] h-[48px] rounded-full flex justify-center items-center bg-[#2e2f30] !ml-auto cursor-pointer"
+          >
             <img src={ArrowUp} alt="top arrow" className="w-[28px]" />
           </div>
           <img src={BarCode} alt="bar code" className="w-[148px] h-[170px]" />
