@@ -5,7 +5,12 @@ import GiftImg1 from "@/assets/images/gift-img.png";
 import SearchInput from "@/components/Input/SearchInput";
 import { Dispatch, ReactNode, SetStateAction, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import { BiFilterAlt, BiFootball, BiSolidDownArrow } from "react-icons/bi";
+import {
+  BiFilterAlt,
+  BiFootball,
+  BiSolidDownArrow,
+  BiSolidUpArrow,
+} from "react-icons/bi";
 import Tabs from "../../../components/Tabs/tabs";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 import Button from "@/components/Button/button";
@@ -27,7 +32,6 @@ const Highlight = () => {
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
   const [tab, setTab] = useState("Football");
-  const [highlightToggle, setHighlightToggle] = useState(true);
   const [resultTable, setResultTable] = useState("ghana lotto");
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -220,10 +224,9 @@ const Highlight = () => {
             {Array.from({ length: 2 }).map((_, idx) => (
               <HighlightGames
                 key={idx}
+                id={idx}
                 data={hightlightGames}
                 setBetSlip={setBetSlip}
-                onToggle={setHighlightToggle}
-                toggleState={highlightToggle}
               />
             ))}
           </div>
@@ -562,14 +565,15 @@ export default Highlight;
 
 const HighlightGames = ({
   data,
+  id,
   setBetSlip,
-  onToggle,
 }: {
   data: Ihightlight[];
   setBetSlip: Dispatch<SetStateAction<Ihightlight[]>>;
-  onToggle: Dispatch<SetStateAction<boolean>>;
-  toggleState: boolean;
+  id: number;
 }) => {
+  const [openId, setOpenId] = useState("");
+
   const toggleBet = (item: Ihightlight, pointIndex: number) => {
     setBetSlip((prev) => {
       const pointToToggle = item.points[pointIndex];
@@ -584,15 +588,26 @@ const HighlightGames = ({
     });
   };
 
+  const onToggle = (id: string) => {
+    if (id === openId) {
+      setOpenId("");
+    } else {
+      setOpenId(id);
+    }
+  };
+
   return (
     <div>
       <div className="bg-[#1D2428] !px-4 !py-3 flex justify-between gap-6 items-center">
-        <div className="flex items-center gap-3 flex[1] w-[45%]">
-          <BiSolidDownArrow
-            size={16}
-            color="white"
-            onClick={() => onToggle(false)}
-          />
+        <div
+          className="flex items-center gap-3 flex[1] w-[45%] cursor-pointer"
+          onClick={() => onToggle(id.toString())}
+        >
+          {openId === id.toString() ? (
+            <BiSolidUpArrow size={16} color="white" />
+          ) : (
+            <BiSolidDownArrow size={16} color="white" />
+          )}
           <p className="text-[14px] text-white font-normal">20/03 Thu</p>
         </div>
         <div className="w-[55%] flex justify-around">
@@ -602,59 +617,60 @@ const HighlightGames = ({
         </div>
       </div>
 
-      {data.map((item, idx) => (
-        <div
-          key={idx}
-          className="bg-[#080B0C] !p-4 flex flex-col gap-3 border-b border-b-[#e0deff33]"
-        >
-          <div>
-            <p className="text-[14px] text-white">{item?.matchTitle}</p>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex flex-col gap-3">
-              <p className="text-base text-white font-normal">
-                {item?.clubs[0]}
-              </p>
-              <p className="text-base text-white font-normal">
-                {item?.clubs[1]}
-              </p>
+      {openId !== id.toString() &&
+        data.map((item, idx) => (
+          <div
+            key={idx}
+            className="bg-[#080B0C] !p-4 flex flex-col gap-3 border-b border-b-[#e0deff33]"
+          >
+            <div>
+              <p className="text-[14px] text-white">{item?.matchTitle}</p>
             </div>
+            <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-3">
+                <p className="text-base text-white font-normal">
+                  {item?.clubs[0]}
+                </p>
+                <p className="text-base text-white font-normal">
+                  {item?.clubs[1]}
+                </p>
+              </div>
 
-            <div className="flex items-center gap-6">
-              <Button
-                text={item?.points[0]?.point}
-                className="!py-3 !px-[62px]"
-                onClick={() => toggleBet(item, 0)}
-              />
-              <Button
-                text={item?.points[1]?.point}
-                className="!py-3 !px-[62px]"
-                onClick={() => toggleBet(item, 1)}
-              />
-              <Button
-                text={item?.points[2]?.point}
-                className="!py-3 !px-[62px]"
-                onClick={() => toggleBet(item, 2)}
-              />
+              <div className="flex items-center gap-6">
+                <Button
+                  text={item?.points[0]?.point}
+                  className="!py-3 !px-[62px]"
+                  onClick={() => toggleBet(item, 0)}
+                />
+                <Button
+                  text={item?.points[1]?.point}
+                  className="!py-3 !px-[62px]"
+                  onClick={() => toggleBet(item, 1)}
+                />
+                <Button
+                  text={item?.points[2]?.point}
+                  className="!py-3 !px-[62px]"
+                  onClick={() => toggleBet(item, 2)}
+                />
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-6">
+                <p className="text-[#FFD700] text-[14px]">18:00</p>
+                <Button
+                  text="Stats"
+                  postIcon={<IoIosArrowForward />}
+                  variant="transparent"
+                  className="border border-[#E0DEF7] !py-1 !px-2 rounded-lg text-xs font-medium"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <p className="text-white text-[14px]">+65</p>
+                <IoIosArrowForward size={24} color="#17BB50" />
+              </div>
             </div>
           </div>
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-6">
-              <p className="text-[#FFD700] text-[14px]">18:00</p>
-              <Button
-                text="Stats"
-                postIcon={<IoIosArrowForward />}
-                variant="transparent"
-                className="border border-[#E0DEF7] !py-1 !px-2 rounded-lg text-xs font-medium"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <p className="text-white text-[14px]">+65</p>
-              <IoIosArrowForward size={24} color="#17BB50" />
-            </div>
-          </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
